@@ -1,0 +1,12 @@
+{
+  "name": "thawedham",
+  "version": "1.0.0",
+  "description": "Thawe Dham Official Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  }
+}

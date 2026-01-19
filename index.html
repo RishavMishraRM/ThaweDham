@@ -1,78 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thawe Dham | Spiritual Divine Experience</title>
-    <meta name="description" content="Official website of Thawe Dham Durga Mandir. Experience the divine energy and history of Rahshu Bhagat.">
+    <title>Thawe Dham | The Divine Shakti Peeth</title>
+    <meta name="description"
+        content="Official website of Thawe Dham Durga Mandir. Experience the divine energy, book pujas, and witness the glory of Mata Thawe Wali.">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Outfit:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body>
+
+<body data-lang="en">
+
+    <!-- Divine Preloader -->
+    <div id="preloader">
+        <div class="om-container">
+            <div class="om-symbol">ॐ</div>
+            <div class="loading-text">Loading Divinity...</div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bellSound" src="Audio/bell.mp3"></audio>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <header id="header">
         <nav>
             <div class="logo">THAWE<span>DHAM</span></div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#history">History</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact" class="btn-primary">Visit Us</a></li>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-en="Home" data-hi="मुख्य पृष्ठ">Home</a></li>
+                <li><a href="#darshan" data-en="Live Darshan" data-hi="दिव्य दर्शन">Live Darshan</a></li>
+                <li><a href="#history" data-en="History" data-hi="इतिहास">History</a></li>
+                <li><a href="#sewa" data-en="E-Sewa" data-hi="ई-सेवा">E-Sewa</a></li>
+                <li><a href="#kaithi" data-en="Kaithi Converter" data-hi="कैथी कन्वर्टर">Kaithi Converter</a></li>
+                <!--<li><a href="#contact" class="btn-primary" data-en="Donate" data-hi="दान करें">Donate</a></li>-->
             </ul>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-controls">
+                <button id="langToggle" class="control-btn" title="Change Language">EN</button>
+                <button id="themeToggle" class="control-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section id="home" class="hero">
+        <!-- Hero Section -->
+        <section id="home" class="hero" style="background-image: url('Images/Mandir.jpg');">
+            <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1 class="fade-up">Divine Blessings of <br><span class="highlight">Mata Thawe Wali</span></h1>
-                <p class="fade-up delay-1">Nestled in the serene landscapes of Gopalganj, experience the spiritual aura of one of India's most sacred Shakti Peethas.</p>
-                <div class="hero-btns fade-up delay-2">
-                    <a href="#about" class="btn-primary">Explore Mandir</a>
-                    <a href="#gallery" class="btn-secondary">View Gallery</a>
+                <div class="daily-tithi" id="tithiDisplay">Loading...</div>
+                <h1 class="reveal-text" data-en="Jai Mata Di" data-hi="जय माता दी">Jai Mata Di</h1>
+                <p class="reveal-text delay"
+                    data-en="Experience the divine presence of Thawe Wali Mata. Where faith meets eternity."
+                    data-hi="थावे वाली माता की दिव्य उपस्थिति का अनुभव करें। जहाँ विश्वास अनंत काल से मिलता है।">
+                    Experience the divine presence of Thawe Wali Mata. Where faith meets eternity.</p>
+                <div class="interactive-shrine reveal-text delay-2">
+                    <button id="ringBellBtn" class="shrine-btn"><i class="fas fa-bell"></i> <span data-en="Ring Bell"
+                            data-hi="घंटी बजाएं">Ring Bell</span></button>
+                    <button id="lightDiyaBtn" class="shrine-btn"><i class="fas fa-fire"></i> <span data-en="Light Diya"
+                            data-hi="दिया जलाएं">Light Diya</span></button>
                 </div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="mouse"></div>
-                <span>Scroll Down</span>
             </div>
         </section>
 
-        <section id="about" class="about">
+        <!-- Live Darshan -->
+        <section id="darshan" class="darshan-section">
             <div class="container">
-                <div class="about-grid">
-                    <div class="about-image">
-                        <img src="Images/Rahs.jpg" alt="Thawe Mandir" class="reveal">
-                    </div>
-                    <div class="about-content">
-                        <span class="subtitle">Sacred Journey</span>
-                        <h2>The Legend of Rahshu Bhagat</h2>
-                        <p>Thawe Dham is not just a temple; it's a testament to the supreme devotion of Rahshu Bhagat. Legend says that Mata Durga appeared here from Kamakhya, traveling through Kolkata and Patna, to prove the devotion of her greatest follower.</p>
-                        <ul class="features">
-                            <li><i class="icon">✨</i> Ancient Divine Heritage</li>
-                            <li><i class="icon">🙏</i> Spiritual Enlightenment</li>
-                            <li><i class="icon">🌿</i> Peaceful Environment</li>
-                        </ul>
+                <div class="section-header">
+                    <span class="subtitle" data-en="Daily Divinity" data-hi="दैनिक दिव्यता">Daily Divinity</span>
+                    <h2 data-en="Today's Darshan" data-hi="आज के दर्शन">Today's Darshan</h2>
+                </div>
+                <div class="darshan-card">
+                    <div class="live-badge"><i class="fas fa-circle"></i> <span data-en="LIVE NOW"
+                            data-hi="अभी लाइव">LIVE NOW</span></div>
+                    <img src="Images/Thawe_Mata_Ji.jpg" id="dailyDarshanImg" alt="Mata Rani Live" class="darshan-img">
+                    <div class="quote-overlay">
+                        <h3 id="dailyQuote">"Faith is the bird that feels the light when the dawn is still dark."</h3>
+                        <p data-en="- Rabindranath Tagore" data-hi="- रवींद्रनाथ टैगोर">- Rabindranath Tagore</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="gallery" class="gallery">
-            <div class="container text-center">
-                <span class="subtitle">Visual Tour</span>
-                <h2>Divine Glimpses</h2>
+        <!-- Legacy / History -->
+        <section id="history" class="history-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle" data-en="The Sacred Legend" data-hi="पवित्र पौराणिक कथा">The Sacred
+                        Legend</span>
+                    <h2 data-en="The Story of Rahshu Bhagat" data-hi="रह्शु भगत की विस्तृत कथा">The Story of Rahshu
+                        Bhagat</h2>
+                </div>
+                <div class="history-detailed">
+                    <div class="history-main-text">
+                        <p class="lead" data-en="A testament to supreme devotion that shook an empire."
+                            data-hi="सर्वोच्च भक्ति का एक प्रमाण जिसने एक साम्राज्य को हिला दिया।">A testament to
+                            supreme devotion that shook an empire.</p>
+
+                        <div class="story-block">
+                            <h3 data-en="The Miracle of Grains" data-hi="अनाज का चमत्कार">The Miracle of Grains</h3>
+                            <p data-en="In the 18th century, during a severe famine, Rahshu Bhagat, a humble devotee, would pray to Mata Rani. Miraculously, he would produce grains from a small piece of tiger-skin to feed the starving people. While the people saw divinity, the local King of Hathwa suspected black magic."
+                                data-hi="18वीं शताब्दी में, एक भीषण अकाल के दौरान, एक विनम्र भक्त रह्शु भगत माता रानी की प्रार्थना करते थे। चमत्कारिक रूप से, वह भूखे लोगों को खिलाने के लिए बाघ की खाल के एक छोटे से टुकड़े से अनाज निकालते थे। जहाँ लोगों ने दिव्यता देखी, वहीं हथवा के तत्कालीन राजा को काले जादू का संदेह हुआ।">
+                                In the 18th century, during a severe famine, Rahshu Bhagat, a humble devotee, would pray
+                                to Mata Rani. Miraculously, he would produce grains from a small piece of tiger-skin to
+                                feed the starving people. While the people saw divinity, the local King of Hathwa
+                                suspected black magic.</p>
+                        </div>
+
+                        <div class="story-block">
+                            <h3 data-en="The Royal Challenge" data-hi="शाही चुनौती">The Royal Challenge</h3>
+                            <p data-en="The King challenged Rahshu to prove his devotion by calling the Goddess in person. Rahshu repeatedly warned the King that the arrival of the Goddess would bring the end of the kingdom. Ignorant and arrogant, the King forced Rahshu to begin the invocation."
+                                data-hi="राजा ने रह्शु को साक्षात् देवी को बुलाकर अपनी भक्ति सिद्ध करने की चुनौती दी। रह्शु ने बार-बार राजा को चेतावनी दी कि देवी के आगमन से राज्य का अंत हो जाएगा। अज्ञानी और अहंकारी राजा ने रह्शु को आह्वान शुरू करने के लिए मजबूर किया।">
+                                The King challenged Rahshu to prove his devotion by calling the Goddess in person.
+                                Rahshu repeatedly warned the King that the arrival of the Goddess would bring the end of
+                                the kingdom. Ignorant and arrogant, the King forced Rahshu to begin the invocation.</p>
+                        </div>
+
+                        <div class="journey-timeline">
+                            <h4 data-en="The Journey of Mata Rani" data-hi="माता रानी की यात्रा">The Journey of Mata
+                                Rani</h4>
+                            <ul class="journey-list">
+                                <li data-en="Mata started from Kamakhya (Assam)" data-hi="माता कामाख्या (असम) से चलीं">
+                                    Mata started from Kamakhya (Assam)</li>
+                                <li data-en="Passed through Kolkata as Dakshineswari"
+                                    data-hi="दक्षिणेश्वरी के रूप में कोलकाता से गुजरीं">Passed through Kolkata as
+                                    Dakshineswari</li>
+                                <li data-en="Reached Patna as Patan Devi" data-hi="पटन देवी के रूप में पटना पहुँचीं">
+                                    Reached Patna as Patan Devi</li>
+                                <li data-en="Passed Ami as Ambika Bhawani"
+                                    data-hi="अंबिका भवानी के रूप में आमी से गुजरीं">Passed Ami as Ambika Bhawani</li>
+                                <li data-en="Finally reached the forests of Thawe"
+                                    data-hi="अंत में थावे के जंगलों में पहुँचीं">Finally reached the forests of Thawe
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="story-block">
+                            <h3 data-en="The Arrival & Salvation" data-hi="आगमन और मोक्ष">The Arrival & Salvation</h3>
+                            <p data-en="As She arrived, the earth shook. Mata Rani's hand emerged through Rahshu's head, holding a golden bangle. At that very moment, the King's massive palace collapsed into ruins, and the Chero dynasty was wiped out. Rahshu Bhagat attained salvation at the feet of the Mother."
+                                data-hi="जैसे ही वह पहुँचीं, धरती काँप उठी। माता रानी का हाथ रह्शु के सिर को चीरते हुए बाहर निकला, जिसमें सोने का कंगन था। उसी क्षण, राजा का विशाल महल खंडहर में बदल गया और चेरो वंश का सर्वनाश हो गया। रह्शु भगत ने माता के चरणों में मोक्ष प्राप्त किया।">
+                                As She arrived, the earth shook. Mata Rani's hand emerged through Rahshu's head, holding
+                                a golden bangle. At that very moment, the King's massive palace collapsed into ruins,
+                                and the Chero dynasty was wiped out. Rahshu Bhagat attained salvation at the feet of the
+                                Mother.</p>
+                        </div>
+
+                        <div class="story-block">
+                            <h3 data-en="The Sacred Shaktipeeth" data-hi="पवित्र शक्तिपीठ">The Sacred Shaktipeeth</h3>
+                            <p data-en="Thawe Dham is revered as a site equivalent to the 52 Shaktipeeths of India. It is believed that Mata Sati's presence is most profound here, attracting millions of devotees who seek her divine protection."
+                                data-hi="थावे मंदिर को भारत के 52 शक्तिपीठों के समान एक स्थल के रूप में पूजा जाता है। यह माना जाता है कि यहाँ माता सती की उपस्थिति सबसे गहरी है, जो लाखों भक्तों को अपनी दिव्य सुरक्षा के लिए आकर्षित करती है।">
+                                Thawe Dham is revered as a site equivalent to the 52 Shaktipeeths of India. It is
+                                believed that Mata Sati's presence is most profound here, attracting millions of
+                                devotees who seek her divine protection.</p>
+                        </div>
+
+                        <div class="story-block">
+                            <h3 data-en="The Mysterious Tree" data-hi="विचित्र वृक्ष">The Mysterious Tree</h3>
+                            <p data-en="Within the temple premises stands a mysterious tree whose botanical identity remains unidentified to this day. Legend says it grew in a cross-like shape, embodying a divine connection with the temple's history and the Mother's appearance."
+                                data-hi="मंदिर के घेरे के भीतर एक विचित्र पेड़ है, जिसकी वानस्पतिक पहचान आज तक अज्ञात है। किंवदंती है कि यह क्रूस की तरह बड़ा हुआ है, जो मंदिर के इतिहास और माता के प्रकट होने के साथ एक दैवीय संबंध का प्रतीक है।">
+                                Within the temple premises stands a mysterious tree whose botanical identity remains
+                                unidentified to this day. Legend says it grew in a cross-like shape, embodying a divine
+                                connection with the temple's history and the Mother's appearance.</p>
+                        </div>
+
+                        <div class="story-block">
+                            <h3 data-en="Grand Fairs & Festivals" data-hi="भव्य मेले और त्योहार">Grand Fairs & Festivals
+                            </h3>
+                            <p data-en="Special Grand Fairs are organized twice a year during the Chaitra (March-April) and Ashwin (October) Navratras. Mondays and Fridays hold special significance for offering 'Prasad' like 'Pidiya' and 'Peda', which are the famous offerings of Thawe Dham."
+                                data-hi="चैत्र (मार्च-अप्रैल) और आश्विन (अक्टूबर) के नवरात्र के दौरान वर्ष में दो बार भव्य मेलों का आयोजन किया जाता है। माता को 'पिड़किया' और 'पेड़ा' - जो थावे धाम के प्रसिद्ध प्रसाद हैं - भोग लगाने के लिए सोमवार और शुक्रवार का विशेष महत्व है।">
+                                Special Grand Fairs are organized twice a year during the Chaitra (March-April) and
+                                Ashwin (October) Navratras. Mondays and Fridays hold special significance for offering
+                                'Prasad' like 'Pidiya' and 'Peda', which are the famous offerings of Thawe Dham.</p>
+                        </div>
+                    </div>
+                    <div class="history-visual">
+                        <div class="tilt-card-large shadow-glow">
+                            <img src="Images/Rahsu_Bhagat.jpg" alt="Rahshu Bhagat Temple">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divine Gallery -->
+        <section id="gallery" class="gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle" data-en="Visual Journey" data-hi="दृश्य यात्रा">Visual Journey</span>
+                    <h2 data-en="Manton Divine Gallery" data-hi="दिव्य दर्शन गैलरी">Divine Gallery</h2>
+                </div>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="Images/slide-1.jpg" alt="Gallery 1"></div>
-                    <div class="gallery-item"><img src="Images/slide-2.jpg" alt="Gallery 2"></div>
-                    <div class="gallery-item"><img src="Images/slide-3.jpg" alt="Gallery 3"></div>
+                    <div class="gallery-item-large">
+                        <img src="Images/Mandir.jpg" alt="Thawe Mandir">
+                        <div class="item-overlay"><span data-en="Main Mandir" data-hi="मुख्य मंदिर">Main Mandir</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Mandir_Gate.jpg" alt="Temple Gate">
+                        <div class="item-overlay"><span data-en="Entry Gate" data-hi="प्रवेश द्वार">Entry Gate</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Thawe_Mata_Ji.jpg" alt="Thawe Mata">
+                        <div class="item-overlay"><span data-en="Mata Di" data-hi="माता रानी">Mata Di</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Devotes.jpg" alt="Devotees">
+                        <div class="item-overlay"><span data-en="Devotees" data-hi="भक्तगण">Devotees</span></div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Rahsu_Bhagat.jpg" alt="Rahshu Bhagat">
+                        <div class="item-overlay"><span data-en="Rahshu Bhagat" data-hi="रह्शु भगत">Rahshu Bhagat</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Images/Nanaji&Nani.jpg" alt="Special Tribute">
+                        <div class="item-overlay"><span data-en="Family Tribute" data-hi="पारिवारिक श्रद्धांजलि">Family
+                                Tribute</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Automated E-Sewa -->
+        <section id="sewa" class="sewa-section">
+            <div class="container text-center">
+                <div class="section-header">
+                    <span class="subtitle" data-en="Online Services" data-hi="ऑनलाइन सेवाएं">Online Services</span>
+                    <h2 data-en="Digital Puja Booking" data-hi="डिजिटल पूजा बुकिंग">Digital Puja Booking</h2>
+                </div>
+                <div class="sewa-grid">
+                    <div class="sewa-card">
+                        <div class="icon-box"><i class="fas fa-om"></i></div>
+                        <h3 data-en="Puja Booking" data-hi="पूजा बुकिंग">Puja Booking</h3>
+                        <p data-en="Participate in sacred rituals and special pujas from anywhere."
+                            data-hi="कहीं से भी पवित्र अनुष्ठानों और विशेष पूजा में भाग लें।">Participate in sacred
+                            rituals and special pujas from anywhere.</p>
+                        <a href="https://wa.me/919971040201?text=Jai%20Mata%20Di.%20I%20want%20to%20book%20a%20Puja.%0AName:%20%0ADate:%20"
+                            target="_blank" class="btn-secondary" data-en="Book Now" data-hi="अभी बुक करें">Book Now</a>
+                    </div>
+                    <div class="sewa-card">
+                        <div class="icon-box"><i class="fas fa-utensils"></i></div>
+                        <h3 data-en="Shadi Vivah" data-hi="शादी-विवाह">Shadi Vivah</h3>
+                        <p data-en="Book temple premises for auspicious wedding ceremonies and rituals."
+                            data-hi="शुभ विवाह समारोहों के लिए मंदिर परिसर बुक करें।">Book temple premises for
+                            auspicious wedding ceremonies and rituals.</p>
+                        <a href="https://wa.me/919971040201?text=Jai%20Mata%20Di.%20I%20want%20to%20book%20the%20Mandir%20for%20a%20Wedding.%0Afrom%20Name:%20%0ADate:%20"
+                            target="_blank" class="btn-secondary" data-en="Inquire Now"
+                            data-hi="अभी पूछताछ करें">Inquire Now</a>
+                    </div>
+                    <div class="sewa-card">
+                        <div class="icon-box"><i class="fas fa-video"></i></div>
+                        <h3 data-en="Prasad Delivery" data-hi="प्रसाद वितरण">Prasad Delivery</h3>
+                        <p data-en="Receive Divine Prasad (Mata ka Bhog) delivered directly to your home."
+                            data-hi="माता का दिव्य प्रसाद सीधे अपने घर पर प्राप्त करें।">Receive Divine Prasad (Mata ka
+                            Bhog) delivered directly to your home.</p>
+                        <a href="https://wa.me/919971040201?text=Jai%20Mata%20Di.%20I%20want%20to%20order%20Prasad%20to%20my%20home.%0AAddress:%20"
+                            target="_blank" class="btn-secondary" data-en="Order Now" data-hi="अभी मंगवाएं">Order
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kaithi Script Converter Section -->
+        <section id="kaithi" class="kaithi-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle" data-en="Preserving Heritage" data-hi="विरासत का संरक्षण">Preserving
+                        Heritage</span>
+                    <h2 data-en="Kaithi Script Converter" data-hi="कैथी लिपि परिवर्तक">Kaithi Script Converter</h2>
+                </div>
+
+                <div class="converter-container">
+                    <div class="upload-card shadow-glow">
+                        <div class="upload-area" id="dropZone">
+                            <i class="fas fa-file-upload"></i>
+                            <p data-en="Drag & Drop or Click to Upload Kaithi Document"
+                                data-hi="कैथी दस्तावेज़ अपलोड करने के लिए खींचें और छोड़ें या क्लिक करें">Drag &
+                                Drop or Click to Upload Kaithi Document</p>
+                            <span data-en="(JPG, PNG, PDF supported)" data-hi="(JPG, PNG, PDF समर्थित)">(JPG, PNG,
+                                PDF supported)</span>
+                            <input type="file" id="kaithiUpload" accept=".jpg,.jpeg,.png,.pdf" hidden>
+                        </div>
+
+                        <div class="converter-controls">
+                            <div class="control-group">
+                                <label for="targetLang" data-en="Translate to:" data-hi="इसमें अनुवाद करें:">Translate
+                                    to:</label>
+                                <select id="targetLang">
+                                    <option value="hindi">Hindi (हिन्दी)</option>
+                                    <option value="english">English</option>
+                                    <option value="bhojpuri">Bhojpuri (भोजपुरी)</option>
+                                </select>
+                            </div>
+                            <button id="convertBtn" class="btn-primary" data-en="Convert Now"
+                                data-hi="अभी परिवर्तित करें">Convert Now</button>
+                        </div>
+                    </div>
+
+                    <div class="result-card" id="resultCard" style="display: none;">
+                        <div class="result-header">
+                            <h3 data-en="Converted Text" data-hi="परिवर्तित पाठ">Converted Text</h3>
+                            <button id="copyBtn" title="Copy Text"><i class="fas fa-copy"></i></button>
+                        </div>
+                        <div class="result-body" id="resultBody">
+                            <!-- Converted text will appear here -->
+                        </div>
+                        <div class="result-footer">
+                            <p class="disclaimer"
+                                data-en="Note: This is an AI-powered conversion. Accuracy may vary based on handwriting quality."
+                                data-hi="नोट: यह AI-आधारित परिवर्तन है। हस्तलेखन की गुणवत्ता के आधार पर सटीकता भिन्न हो सकती है।">
+                                Note: This is an AI-powered conversion. Accuracy may vary based on handwriting
+                                quality.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -80,31 +338,22 @@
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-info">
-                    <div class="logo">THAWE<span>DHAM</span></div>
-                    <p>Experience the divine energy of Mata Thawe Wali. A spiritual sanctuary for devotees across the world.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Visit Us</h4>
-                    <p>Gopalganj, Bihar, India</p>
-                    <p>Email: info@thawedham.in</p>
-                </div>
+            <div class="footer-logo">THAWE<span>DHAM</span></div>
+            <p data-en="May Mata's blessings be with you always." data-hi="माता रानी की कृपा आप पर सदैव बनी रहे।">May
+                Mata's blessings be with you always.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Thawe Dham. All Rights Reserved.</p>
+            <div class="copyright">
+                <p>&copy; 2026 Thawe Dham. <span data-en="Designed with devotion."
+                        data-hi="भक्ति के साथ निर्मित।">Designed with devotion.</span></p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
