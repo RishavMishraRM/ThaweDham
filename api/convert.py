@@ -38,7 +38,7 @@ class handler(BaseHTTPRequestHandler):
             model = genai.GenerativeModel('gemini-flash-latest')
 
             # Prepare prompt
-            prompt = f"Analyze this image containing Kaithi or Urdu script. Provide strictly ONLY two things:\n1. The exact transliteration of what is written in the document.\n2. The translation of that text into {target_lang}.\n\nDo not provide any explanations, legal interpretations, or extra commentary. Just the converted text."
+            prompt = f"This is an image containing text which may be in Kaithi or Urdu script (or a mix). First, identify which script it is. Then, transliterate it and translate the full content into {target_lang}. Format the output nicely."
 
             # Process image
             image_bytes = base64.b64decode(image_data)
