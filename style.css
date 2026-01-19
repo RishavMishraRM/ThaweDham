@@ -896,7 +896,6 @@ footer {
     border-radius: 25px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    animation: slideUp 0.5s ease;
     box-shadow: var(--shadow);
 }
 
@@ -911,6 +910,11 @@ footer {
 .result-header h3 {
     font-size: 1.1rem;
     color: var(--accent);
+}
+
+.result-actions {
+    display: flex;
+    gap: 15px;
 }
 
 .result-header button {

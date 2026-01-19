@@ -344,7 +344,7 @@ if (convertBtn) {
             const targetLang = document.getElementById('targetLang').value;
 
             // Call our secure Python backend API
-            const response = await fetch('http://localhost:5000/api/convert', {
+            const response = await fetch('/api/convert', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -364,34 +364,46 @@ if (convertBtn) {
             resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
         } catch (error) {
-            console.error("Conversion Error:", error);
+            console.error("Conversion Error detall:", error);
             alert("Error converting document: " + (error.message || "Unknown error"));
         } finally {
             convertBtn.disabled = false;
-            convertBtn.textContent = originalText;
+            convertBtn.innerHTML = originalText;
         }
     });
 }
 
 function displayResult(text) {
+    // 1. Reset and Show Card
     resultCard.style.display = 'block';
     resultBody.textContent = "";
 
-    gsap.from(resultCard, {
-        y: 30, opacity: 0, duration: 0.8, ease: "power2.out"
-    });
+    // 2. Smooth reveal animation
+    gsap.fromTo(resultCard,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
 
-    // Typewriter effect
+    // 3. Robust Typewriter effect
     let i = 0;
-    const typing = setInterval(() => {
+    // Clear any previous interval just in case
+    if (window.typingInterval) clearInterval(window.typingInterval);
+
+    window.typingInterval = setInterval(() => {
         if (i < text.length) {
             resultBody.textContent += text.charAt(i);
             i++;
+            // Scroll along with typing if it gets long
+            if (i % 10 === 0) {
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         } else {
-            clearInterval(typing);
+            clearInterval(window.typingInterval);
         }
-    }, 10);
+    }, 15);
 }
+
+const downloadBtn = document.getElementById('downloadBtn');
 
 if (copyBtn) {
     copyBtn.addEventListener('click', () => {
@@ -399,5 +411,28 @@ if (copyBtn) {
         const icon = copyBtn.querySelector('i');
         icon.className = 'fas fa-check';
         setTimeout(() => { icon.className = 'fas fa-copy'; }, 2000);
+    });
+}
+
+if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+        const text = resultBody.textContent;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+
+        const timestamp = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `Kaithi_Conversion_${timestamp}.txt`;
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        // Visual feedback
+        const icon = downloadBtn.querySelector('i');
+        icon.className = 'fas fa-check';
+        setTimeout(() => { icon.className = 'fas fa-file-download'; }, 2000);
     });
 }
