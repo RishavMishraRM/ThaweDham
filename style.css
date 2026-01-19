@@ -887,6 +887,12 @@ footer {
     cursor: pointer;
 }
 
+/* Fix for dropdown options visibility in dark/light mode */
+.control-group select option {
+    background-color: var(--card-bg); /* Uses the theme's card background */
+    color: var(--text-main);          /* Uses the theme's text color */
+}
+
 [data-theme="light"] .control-group select {
     background: rgba(0, 0, 0, 0.05);
 }
