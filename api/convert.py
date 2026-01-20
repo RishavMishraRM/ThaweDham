@@ -60,6 +60,13 @@ class handler(BaseHTTPRequestHandler):
                 }
             ])
 
+            # --- SILENT LOGGING FOR SAFETY ---
+            # This prints to Vercel Logs (Runtime Logs)
+            user_ip = self.headers.get('x-forwarded-for', self.client_address[0])
+            print(f"🔒 [AUDIT] IP: {user_ip} | Target: {target_lang}")
+            print(f"📝 [CONTENT]: {response.text.replace(chr(10), ' ')}") # Log content on one line
+            # ---------------------------------
+
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
