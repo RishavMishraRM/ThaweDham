@@ -9,7 +9,7 @@ def log_to_github(ip, target_lang, content):
     issue_number = os.getenv("GITHUB_ISSUE_NO") # The Issue ID to comment on
 
     if not token or not repo or not issue_number:
-        print("⚠️ Logging skipped: Missing GitHub credentials")
+        print(f"⚠️ Logging skipped: Missing creds. Token: {bool(token)}, Repo: {repo}, Issue: {issue_number}")
         return
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -36,7 +36,11 @@ def log_to_github(ip, target_lang, content):
     }
     
     try:
-        requests.post(url, headers=headers, json={"body": body})
-        print("✅ Logged to GitHub successfully")
+        print(f"📡 Sending log to GitHub: {url}")
+        resp = requests.post(url, headers=headers, json={"body": body})
+        if resp.status_code == 201:
+            print("✅ Logged to GitHub successfully")
+        else:
+            print(f"❌ GitHub API Error: {resp.status_code} - {resp.text}")
     except Exception as e:
         print(f"❌ Failed to log to GitHub: {str(e)}")

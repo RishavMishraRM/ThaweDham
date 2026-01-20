@@ -344,7 +344,7 @@ if (convertBtn) {
             const targetLang = document.getElementById('targetLang').value;
 
             // Call our secure Python backend API
-            const response = await fetch('/api/convert', {
+            const response = await fetch('http://localhost:5000/api/convert', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -71,6 +71,17 @@ def convert_kaithi():
             }
         ])
 
+        # --- LOGGING ---
+        try:
+            from api.logger import log_to_github
+            # Get IP (local dev usually 127.0.0.1)
+            user_ip = request.remote_addr
+            print(f"🔒 Logging to GitHub for IP: {user_ip}")
+            log_to_github(user_ip, target_lang, response.text)
+        except Exception as log_ex:
+            print(f"❌ Logger failed: {log_ex}")
+        # ---------------
+
         return jsonify({"text": response.text})
 
     except Exception as e:

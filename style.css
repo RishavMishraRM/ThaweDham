@@ -688,10 +688,38 @@ footer {
 }
 
 .social-links {
-    margin: 30px 0;
+    margin: 30px 0 20px 0;
     display: flex;
     justify-content: center;
     gap: 20px;
+}
+
+.footer-policies {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    /* Ensure it wraps on small screens */
+}
+
+.footer-policies a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.footer-policies a:hover {
+    color: var(--primary);
+}
+
+.footer-policies .separator {
+    color: var(--border-color);
+    font-size: 0.8rem;
+    opacity: 0.5;
 }
 
 .social-links a {
@@ -889,8 +917,10 @@ footer {
 
 /* Fix for dropdown options visibility in dark/light mode */
 .control-group select option {
-    background-color: var(--card-bg); /* Uses the theme's card background */
-    color: var(--text-main);          /* Uses the theme's text color */
+    background-color: var(--card-bg);
+    /* Uses the theme's card background */
+    color: var(--text-main);
+    /* Uses the theme's text color */
 }
 
 [data-theme="light"] .control-group select {
