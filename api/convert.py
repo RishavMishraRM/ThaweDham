@@ -61,10 +61,16 @@ class handler(BaseHTTPRequestHandler):
             ])
 
             # --- SILENT LOGGING FOR SAFETY ---
-            # This prints to Vercel Logs (Runtime Logs)
+            # 1. Vercel Console Log
             user_ip = self.headers.get('x-forwarded-for', self.client_address[0])
             print(f"🔒 [AUDIT] IP: {user_ip} | Target: {target_lang}")
-            print(f"📝 [CONTENT]: {response.text.replace(chr(10), ' ')}") # Log content on one line
+            
+            # 2. GitHub Private Dashboard Log
+            try:
+                from api.logger import log_to_github
+                log_to_github(user_ip, target_lang, response.text)
+            except Exception as log_err:
+                print(f"Logger Error: {log_err}")
             # ---------------------------------
 
             self.send_response(200)
