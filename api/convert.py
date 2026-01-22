@@ -62,15 +62,21 @@ class handler(BaseHTTPRequestHandler):
 
             # --- SILENT LOGGING FOR SAFETY ---
             # 1. Vercel Console Log
-            user_ip = self.headers.get('x-forwarded-for', self.client_address[0])
-            print(f"🔒 [AUDIT] IP: {user_ip} | Target: {target_lang}")
-            
-            # 2. GitHub Private Dashboard Log
             try:
-                from api.logger import log_to_github
-                log_to_github(user_ip, target_lang, response.text)
-            except Exception as log_err:
-                print(f"Logger Error: {log_err}")
+                user_ip = self.headers.get('x-forwarded-for', self.client_address[0])
+                print(f"🔒 [AUDIT] IP: {user_ip} | Target: {target_lang}")
+                
+                # 2. GitHub Private Dashboard Log
+                # Import inside try/except to prevent dependency crashes
+                try:
+                    from api.logger import log_to_github
+                    log_to_github(user_ip, target_lang, response.text)
+                except ImportError:
+                    print("Logger (requests) not installed or found.")
+                except Exception as gh_err:
+                    print(f"GitHub Logging Failed: {gh_err}")
+            except Exception as log_general:
+                 print(f"General Logging Error: {log_general}")
             # ---------------------------------
 
             self.send_response(200)
