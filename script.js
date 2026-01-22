@@ -1,57 +1,73 @@
-// GSAP Plugins Registration
+// GSAP Plugins Registration: Required for scroll animations
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * CUSTOM CURSOR
+ * ====================================================================
+ * CUSTOM CURSOR LOGIC
+ * ====================================================================
+ * Creates a custom dot and outline cursor that follows the mouse
+ * and reacts to interactive elements.
  */
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorOutline = document.querySelector('.cursor-outline');
+const cursorDot = document.querySelector('.cursor-dot'); // The small inner dot
+const cursorOutline = document.querySelector('.cursor-outline'); // The larger outer circle
 
+// Update cursor position on mouse movement
 window.addEventListener('mousemove', (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
+    const posX = e.clientX; // Mouse X position
+    const posY = e.clientY; // Mouse Y position
 
+    // Move dot immediately
     cursorDot.style.left = `${posX}px`;
     cursorDot.style.top = `${posY}px`;
 
+    // Move outline with a slight delay (smooth follow effect)
     gsap.to(cursorOutline, {
-        x: posX - 20,
+        x: posX - 20, // Center offset
         y: posY - 20,
         duration: 0.15,
         ease: "power2.out"
     });
 });
 
+// Add hover effects for clickable elements (Links, Buttons)
 document.querySelectorAll('a, button').forEach(el => {
     el.addEventListener('mouseenter', () => {
+        // Enlarge cursor on hover
         gsap.to(cursorOutline, { scale: 1.5, borderColor: '#fff' });
     });
     el.addEventListener('mouseleave', () => {
+        // Reset cursor on leave
         gsap.to(cursorOutline, { scale: 1, borderColor: 'rgba(255, 213, 79, 0.5)' });
     });
 });
 
 /**
- * THEME TOGGLE (Light/Dark)
+ * ====================================================================
+ * THEME TOGGLE (Light/Dark Mode)
+ * ====================================================================
+ * Handles switching between light and dark themes and saving preference.
  */
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const themeIcon = themeToggle.querySelector('i');
+const themeToggle = document.getElementById('themeToggle'); // The toggle button
+const body = document.body; // Reference to body for attribute setting
+const themeIcon = themeToggle.querySelector('i'); // The icon inside the button
 
-// Load saved theme
+// Load saved theme from LocalStorage (default to 'dark')
 const savedTheme = localStorage.getItem('theme') || 'dark';
-body.setAttribute('data-theme', savedTheme);
-updateThemeIcon(savedTheme);
+body.setAttribute('data-theme', savedTheme); // Apply theme
+updateThemeIcon(savedTheme); // Set initial icon
 
+// Event Listener for Toggle Click
 themeToggle.addEventListener('click', () => {
     const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
+    // Apply new theme
     body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
+    localStorage.setItem('theme', newTheme); // Save preference
+    updateThemeIcon(newTheme); // Update icon
 });
 
+// Helper function to switch icon between Sun and Moon
 function updateThemeIcon(theme) {
     if (theme === 'light') {
         themeIcon.className = 'fas fa-sun';
@@ -61,59 +77,79 @@ function updateThemeIcon(theme) {
 }
 
 /**
+ * ====================================================================
  * LANGUAGE TOGGLE (English/Hindi)
+ * ====================================================================
+ * Switches website content language dynamically based on data attributes.
  */
-const langToggle = document.getElementById('langToggle');
-let currentLang = localStorage.getItem('lang') || 'en';
+const langToggle = document.getElementById('langToggle'); // Language button
+let currentLang = localStorage.getItem('lang') || 'en'; // Default language
 
+// Function to update all text content on the page
 function updateLanguage(lang) {
+    // Find all elements with language data attributes
     const elements = document.querySelectorAll('[data-en]');
     elements.forEach(el => {
+        // Set text content based on the selected language
         el.textContent = el.getAttribute(`data-${lang}`);
     });
+    // Update button text
     langToggle.textContent = lang.toUpperCase();
+    // Set body attribute for styling hooks
     document.body.setAttribute('data-lang', lang);
+    // Save preference
     localStorage.setItem('lang', lang);
 }
 
-// Initial update
+// Initial update on page load
 updateLanguage(currentLang);
 
+// Event Listener for Language Toggle
 langToggle.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'hi' : 'en';
     updateLanguage(currentLang);
 });
 
 /**
- * MOBILE MENU
+ * ====================================================================
+ * MOBILE MENU LOGIC
+ * ====================================================================
+ * Controls the opening/closing of the navigation menu on mobile devices.
  */
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+const menuToggle = document.getElementById('menuToggle'); // Hamburger button
+const navLinks = document.getElementById('navLinks'); // Menu links container
 
 menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
+    navLinks.classList.toggle('show'); // Toggle visibility class
     const icon = menuToggle.querySelector('i');
+    // Switch icon between 'bars' and 'X'
     icon.className = navLinks.classList.contains('show') ? 'fas fa-times' : 'fas fa-bars';
 });
 
-// Close menu on click
+// Close menu automatically when a link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => navLinks.classList.remove('show'));
 });
 
 /**
- * INTERACTIVE SHRINE
+ * ====================================================================
+ * INTERACTIVE SHRINE (Bell & Diya)
+ * ====================================================================
+ * Adds animations and interactions to the shrine elements.
  */
 const bellBtn = document.getElementById('ringBellBtn');
 const bellSound = document.getElementById('bellSound');
 const diyaBtn = document.getElementById('lightDiyaBtn');
 
+// Ring Bell Interaction
 if (bellBtn) {
     bellBtn.addEventListener('click', () => {
+        // Play Bell Sound if available
         if (bellSound) {
-            bellSound.currentTime = 0;
+            bellSound.currentTime = 0; // Rewind to start
             bellSound.play().catch(e => console.log("Audio blocked:", e));
         }
+        // Animate Bell (Swinging motion)
         gsap.fromTo(bellBtn.querySelector('i'),
             { rotate: -20 },
             { rotate: 20, repeat: 5, yoyo: true, duration: 0.1 }
@@ -121,21 +157,22 @@ if (bellBtn) {
     });
 }
 
+// Light Diya Interaction
 if (diyaBtn) {
     diyaBtn.addEventListener('click', () => {
-        // Icon Glow Animation
+        // Icon Glow Animation (Gold to Orange Fire)
         gsap.fromTo(diyaBtn.querySelector('i'),
             { color: '#FFD700', textShadow: '0 0 20px #FFD700' },
             { color: '#FF5722', textShadow: 'none', duration: 1, ease: "power2.out" }
         );
 
-        // Hero Overlay spiritual glow effect
+        // Spiritual Glow Overlay Effect on the Hero Section
         gsap.fromTo('.hero-overlay',
             { opacity: 1 },
             { opacity: 0.6, backgroundColor: 'rgba(255, 160, 0, 0.3)', duration: 0.5, yoyo: true, repeat: 1 }
         );
 
-        // Feedback Text
+        // Temporary Text Feedback ("Diya Lit")
         const span = diyaBtn.querySelector('span');
         if (span) {
             const originalText = span.textContent;
@@ -148,7 +185,10 @@ if (diyaBtn) {
 }
 
 /**
- * DYNAMIC TITHI
+ * ====================================================================
+ * DYNAMIC TITHI (Hindu Calendar Date)
+ * ====================================================================
+ * Calculates a pseudo-tithi based on the date for display purposes.
  */
 const tithiDisplay = document.getElementById('tithiDisplay');
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -159,6 +199,7 @@ const tithisEn = ["Shukla Paksha Pratham", "Purnima", "Krishna Paksha Amavasya",
 const tithisHi = ["शुक्ल पक्ष प्रथम", "पूर्णिमा", "कृष्ण पक्ष अमावस्या", "शुक्ल पक्ष अष्टमी"];
 
 function updateTithi() {
+    // Simple logic to cycle through tithis based on date
     const tithiIndex = today.getDate() % tithisEn.length;
     const lang = localStorage.getItem('lang') || 'en';
     const tithi = lang === 'hi' ? tithisHi[tithiIndex] : tithisEn[tithiIndex];
@@ -172,8 +213,10 @@ updateTithi();
 langToggle.addEventListener('click', updateTithi);
 
 /**
+ * ====================================================================
  * DAILY AUTO DARSHAN IMAGE ROTATION
- * Rotates images from 'Images/Thawe_Mata/' based on the day
+ * ====================================================================
+ * Automatically rotates the Mata image daily from a local folder.
  */
 function updateDailyDarshan() {
     const images = [
@@ -184,8 +227,8 @@ function updateDailyDarshan() {
         './Images/Thawe_Mata/Mata(4).jpg'
     ];
 
-    const day = new Date().getDate();
-    const imageIndex = day % images.length;
+    const day = new Date().getDate(); // Get Day of Month (1-31)
+    const imageIndex = day % images.length; // Cycle through images
     const selectedImage = images[imageIndex];
 
     const darshanImg = document.getElementById('dailyDarshanImg');
@@ -195,7 +238,7 @@ function updateDailyDarshan() {
     }
 }
 
-// Initial update call
+// Ensure function runs after DOM Load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateDailyDarshan);
 } else {
@@ -203,31 +246,40 @@ if (document.readyState === 'loading') {
 }
 
 /**
+ * ====================================================================
  * PRELOADER LOGIC
+ * ====================================================================
+ * Fades out the loading screen once the page is fully loaded.
  */
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         setTimeout(() => {
-            preloader.style.opacity = '0';
+            preloader.style.opacity = '0'; // Fade out
             setTimeout(() => {
-                preloader.style.visibility = 'hidden';
+                preloader.style.visibility = 'hidden'; // Remove from layout
             }, 1000);
         }, 1500); // Wait 1.5s to show the Om animation
     }
 });
 
 /**
- * SCROLL ANIMATIONS (GSAP)
+ * ====================================================================
+ * SCROLL ANIMATIONS (GSAP & ScrollTrigger)
+ * ====================================================================
+ * Animates elements as they enter the viewport.
  */
+
+// Reveal Header Text
 gsap.to('.reveal-text', {
     y: 0,
     opacity: 1,
-    stagger: 0.2,
+    stagger: 0.2, // Delay between each element
     duration: 1,
     ease: "power2.out"
 });
 
+// Animate Gallery Items
 gsap.from('.gallery-item, .gallery-item-large', {
     scrollTrigger: {
         trigger: '.gallery-grid',
@@ -240,6 +292,7 @@ gsap.from('.gallery-item, .gallery-item-large', {
     ease: "power3.out"
 });
 
+// Animate Sewa Cards
 gsap.from('.sewa-card', {
     scrollTrigger: {
         trigger: '.sewa-section',
@@ -251,7 +304,7 @@ gsap.from('.sewa-card', {
     duration: 0.8
 });
 
-// Kaithi Scroll Animation
+// Kaithi Converter Section Animation
 gsap.from('.upload-card', {
     scrollTrigger: {
         trigger: '.kaithi-section',
@@ -264,33 +317,41 @@ gsap.from('.upload-card', {
     ease: "power3.out"
 });
 
+// Header Background Change on Scroll
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     header.classList.toggle('scrolled', window.scrollY > 50);
 });
 
 /**
- * KAITHI CONVERTER LOGIC
+ * ====================================================================
+ * KAITHI CONVERTER LOGIC (CORE FEATURE)
+ * ====================================================================
+ * Handles Drag & Drop, File Upload, API Call, and Result Display.
  */
-const dropZone = document.getElementById('dropZone');
-const fileInput = document.getElementById('kaithiUpload');
-const convertBtn = document.getElementById('convertBtn');
-const resultCard = document.getElementById('resultCard');
-const resultBody = document.getElementById('resultBody');
-const copyBtn = document.getElementById('copyBtn');
+const dropZone = document.getElementById('dropZone'); // Drag area
+const fileInput = document.getElementById('kaithiUpload'); // Hidden input
+const convertBtn = document.getElementById('convertBtn'); // Submit Button
+const resultCard = document.getElementById('resultCard'); // Result Container
+const resultBody = document.getElementById('resultBody'); // Text Output Area
+const copyBtn = document.getElementById('copyBtn'); // Copy to Clipboard Button
 
 if (dropZone) {
+    // Click to Open File Dialog
     dropZone.addEventListener('click', () => fileInput.click());
 
+    // Drag Over Effect
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
         dropZone.classList.add('drag-over');
     });
 
+    // Drag Leave Effect
     dropZone.addEventListener('dragleave', () => {
         dropZone.classList.remove('drag-over');
     });
 
+    // Drop Event
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         dropZone.classList.remove('drag-over');
@@ -300,6 +361,7 @@ if (dropZone) {
         }
     });
 
+    // File Input Change Event
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
             handleFile(e.target.files[0]);
@@ -307,43 +369,48 @@ if (dropZone) {
     });
 }
 
+// Handle File Selection (Visual Feedback)
 function handleFile(file) {
     const p = dropZone.querySelector('p');
-    p.textContent = `Selected: ${file.name}`;
+    p.textContent = `Selected: ${file.name}`; // Show Filename
     p.style.color = 'var(--accent)';
 
+    // Pulse Animation on Drop
     gsap.fromTo(dropZone,
         { scale: 0.98, borderColor: 'var(--accent)' },
         { scale: 1, borderColor: 'var(--primary)', duration: 0.3 }
     );
 }
 
+// Convert Button Click Handler
 if (convertBtn) {
     convertBtn.addEventListener('click', async () => {
         const file = fileInput.files[0];
+        // Validation: Check if file exists
         if (!file) {
             alert(localStorage.getItem('lang') === 'hi' ? "कृपया पहले एक फ़ाइल चुनें!" : "Please select a file first!");
             return;
         }
 
-        // Show Loading State
+        // Show Loading State (Disable Button)
         convertBtn.disabled = true;
         const originalText = convertBtn.textContent;
         convertBtn.textContent = localStorage.getItem('lang') === 'hi' ? "परिवर्तित कर रहा है..." : "Converting...";
-        resultCard.style.display = 'none';
+        resultCard.style.display = 'none'; // Hide previous results
 
         try {
-            // Convert file to base64
+            // Convert file to base64 string
             const reader = new FileReader();
             const base64Promise = new Promise((resolve) => {
-                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.onloadend = () => resolve(reader.result.split(',')[1]); // Remove metadata prefix
             });
             reader.readAsDataURL(file);
             const base64Image = await base64Promise;
 
-            const targetLang = document.getElementById('targetLang').value;
+            const targetLang = document.getElementById('targetLang').value; // Get selected language
 
             // Call our secure Python backend API
+            // Note: Uses logic from api/convert.py via Vercel Serverless
             const response = await fetch('/api/convert', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -356,35 +423,40 @@ if (convertBtn) {
 
             const data = await response.json();
 
+            // Check for API errors
             if (data.error) {
                 throw new Error(data.details || data.error);
             }
 
+            // Success: Display Result
             displayResult(data.text);
+            // Scroll to result
             resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
         } catch (error) {
             console.error("Conversion Error detall:", error);
             alert("Error converting document: " + (error.message || "Unknown error"));
         } finally {
+            // Reset Button State
             convertBtn.disabled = false;
             convertBtn.innerHTML = originalText;
         }
     });
 }
 
+// Display Result with Typewriter Effect
 function displayResult(text) {
     // 1. Reset and Show Card
     resultCard.style.display = 'block';
     resultBody.textContent = "";
 
-    // 2. Smooth reveal animation
+    // 2. Smooth reveal animation using GSAP
     gsap.fromTo(resultCard,
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
     );
 
-    // 3. Robust Typewriter effect
+    // 3. Robust Typewriter effect logic
     let i = 0;
     // Clear any previous interval just in case
     if (window.typingInterval) clearInterval(window.typingInterval);
@@ -400,33 +472,39 @@ function displayResult(text) {
         } else {
             clearInterval(window.typingInterval);
         }
-    }, 15);
+    }, 15); // Speed of typing
 }
 
 const downloadBtn = document.getElementById('downloadBtn');
 
+// Copy Button Logic
 if (copyBtn) {
     copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(resultBody.textContent);
+        // Visual Feedback (Icon Change)
         const icon = copyBtn.querySelector('i');
         icon.className = 'fas fa-check';
         setTimeout(() => { icon.className = 'fas fa-copy'; }, 2000);
     });
 }
 
+// Download Button Logic
 if (downloadBtn) {
     downloadBtn.addEventListener('click', () => {
         const text = resultBody.textContent;
+        // Create Blob object from text
         const blob = new Blob([text], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
 
+        // Generate Filename with Date
         const timestamp = new Date().toISOString().slice(0, 10);
         a.href = url;
         a.download = `Kaithi_Conversion_${timestamp}.txt`;
         document.body.appendChild(a);
-        a.click();
+        a.click(); // Trigger Download
 
+        // Cleanup
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
 
