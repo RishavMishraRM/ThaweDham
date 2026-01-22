@@ -1,8 +1,12 @@
 import os
 import base64
 import json
+import warnings
 from http.server import BaseHTTPRequestHandler
 import google.generativeai as genai
+
+# Suppress the Google SDK deprecation warning to keep logs clean
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Configure Gemini
 api_key = os.getenv("GEMINI_API_KEY")
@@ -34,8 +38,8 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Missing required fields"}).encode())
                 return
 
-            # Initialize model - using the one that worked in UAT
-            model = genai.GenerativeModel('gemini-flash-latest')
+            # Initialize model - using stable version 1.5
+            model = genai.GenerativeModel('gemini-1.5-flash')
 
             # Prepare prompt
             prompt = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
