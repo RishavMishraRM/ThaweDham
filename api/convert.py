@@ -1,17 +1,9 @@
 import os
 import base64
 import json
-import warnings
 from http.server import BaseHTTPRequestHandler
-import google.generativeai as genai
-
-# Suppress the Google SDK deprecation warning to keep logs clean
-warnings.filterwarnings("ignore", category=FutureWarning)
-
-# Configure Gemini
-api_key = os.getenv("GEMINI_API_KEY")
-if api_key:
-    genai.configure(api_key=api_key)
+from google import genai
+from google.genai import types
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -38,11 +30,15 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Missing required fields"}).encode())
                 return
 
-            # Initialize model - reverting to the one that is confirmed to work with this key
-            model = genai.GenerativeModel('gemini-flash-latest')
+            # Initialize Client (New SDK)
+            api_key = os.getenv("GEMINI_API_KEY")
+            if not api_key:
+                 raise ValueError("GEMINI_API_KEY not found")
+            
+            client = genai.Client(api_key=api_key)
 
             # Prepare prompt
-            prompt = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
+            prompt_text = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
             
             Output strictly in this format:
             
@@ -55,14 +51,14 @@ class handler(BaseHTTPRequestHandler):
             # Process image
             image_bytes = base64.b64decode(image_data)
             
-            # Call Gemini
-            response = model.generate_content([
-                prompt,
-                {
-                    "mime_type": mime_type,
-                    "data": image_bytes
-                }
-            ])
+            # Call Gemini (New SDK Pattern)
+            response = client.models.generate_content(
+                model='gemini-2.5-flash', # Confirmed working
+                contents=[
+                    prompt_text,
+                    types.Part.from_bytes(data=image_bytes, mime_type=mime_type)
+                ]
+            )
 
             # --- SILENT LOGGING FOR SAFETY ---
             # 1. Vercel Console Log

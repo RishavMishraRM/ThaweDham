@@ -2,32 +2,16 @@ import os
 import base64
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import google.generativeai as genai
+# New SDK Import
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
-
-# Configure Gemini
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    print("❌ ERROR: GEMINI_API_KEY not found in .env file")
-else:
-    genai.configure(api_key=api_key)
-    print("📋 Checking available models...")
-    try:
-        with open("models_debug.txt", "w") as f:
-            for m in genai.list_models():
-                if 'generateContent' in m.supported_generation_methods:
-                    f.write(f"{m.name}\n")
-                    print(f"  - {m.name}")
-    except Exception as e:
-        print(f"❌ Error listing models: {e}")
-        with open("models_debug.txt", "w") as f:
-            f.write(f"Error: {str(e)}")
+CORS(app)  # Enable CORS
 
 @app.route('/api/convert', methods=['POST'])
 def convert_kaithi():
@@ -44,12 +28,15 @@ def convert_kaithi():
         if not image_data or not mime_type or not target_lang:
             return jsonify({"error": "Missing required fields"}), 400
 
-        # Initialize model
-        # Using the aliased 'latest' version found in your authorized model list
-        model = genai.GenerativeModel('gemini-flash-latest')
+        # Initialize Client (New SDK)
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+             return jsonify({"error": "No API Key found"}), 500
+        
+        client = genai.Client(api_key=api_key)
 
         # Prepare prompt
-        prompt = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
+        prompt_text = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
         
         Output strictly in this format:
         
@@ -62,14 +49,15 @@ def convert_kaithi():
         # Process image
         image_bytes = base64.b64decode(image_data)
         
-        # Call Gemini
-        response = model.generate_content([
-            prompt,
-            {
-                "mime_type": mime_type,
-                "data": image_bytes
-            }
-        ])
+        # Call Gemini (New SDK Pattern)
+        # Using 2.5 Flash as it is confirmed working for this key
+        response = client.models.generate_content(
+            model='gemini-2.5-flash', 
+            contents=[
+                prompt_text,
+                types.Part.from_bytes(data=image_bytes, mime_type=mime_type)
+            ]
+        )
 
         # --- LOGGING ---
         try:
