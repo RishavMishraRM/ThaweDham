@@ -38,8 +38,8 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": "Missing required fields"}).encode())
                 return
 
-            # Initialize model - using stable version 1.5
-            model = genai.GenerativeModel('gemini-1.5-flash')
+            # Initialize model - reverting to the one that is confirmed to work with this key
+            model = genai.GenerativeModel('gemini-flash-latest')
 
             # Prepare prompt
             prompt = f"""Analyze this image containing text in Kaithi or Urdu script. Translate the full content into {target_lang}.
