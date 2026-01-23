@@ -4,9 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thawe Dham | The Divine Shakti Peeth</title>
+    <title>Thawe Dham | Official Temple Website & Kaithi Script Converter</title>
     <meta name="description"
-        content="Official website of Thawe Dham Durga Mandir. Experience the divine energy, book pujas, and witness the glory of Mata Thawe Wali.">
+        content="Official website of Thawe Dham Shakti Peeth. Experience Live Darshan of Mata Thawe Wali, book Online Puja, and use our Free AI Kaithi & Urdu Script Converter.">
+    <meta name="keywords"
+        content="Thawe Dham, Thawe Mandir, Mata Thawe Wali, Kaithi Script Converter, Kaithi to Hindi, Rahshu Bhagat, Gopalganj Temple, Bihar Tourism">
+    <link rel="canonical" href="https://thawedham.com/">
+
+    <!-- SOCIAL MEDIA TAGS (Open Graph) -->
+    <meta property="og:title" content="Thawe Dham - Shakti Peeth & Kaithi Converter">
+    <meta property="og:description"
+        content="Official website: Live Darshan, History, and Free AI Kaithi Script Translation Tool.">
+    <meta property="og:image" content="https://thawedham.com/Images/Mandir.jpg">
+    <meta property="og:url" content="https://thawedham.com/">
+    <meta property="og:type" content="website">
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Thawe Dham Official">
+    <meta name="twitter:description" content="Live Darshan and Kaithi Script Translation Tool.">
+    <meta name="twitter:image" content="https://thawedham.com/Images/Mandir.jpg">
+
     <link rel="stylesheet" href="style.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +83,9 @@
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="daily-tithi" id="tithiDisplay">Loading...</div>
-                <h1 class="reveal-text" data-en="Jai Mata Di" data-hi="जय माता दी">Jai Mata Di</h1>
+                <h1 class="reveal-text" data-en="Welcome to Thawe Dham" data-hi="थावे धाम में आपका स्वागत है">Welcome to
+                    Thawe Dham</h1>
+                <p class="subtitle" style="font-size: 1.5rem; color: #FFD700; margin-bottom: 1rem;">Jai Mata Di</p>
                 <p class="reveal-text delay"
                     data-en="Experience the divine presence of Thawe Wali Mata. Where faith meets eternity."
                     data-hi="थावे वाली माता की दिव्य उपस्थिति का अनुभव करें। जहाँ विश्वास अनंत काल से मिलता है।">
@@ -89,7 +109,8 @@
                 <div class="darshan-card">
                     <div class="live-badge"><i class="fas fa-circle"></i> <span data-en="LIVE NOW"
                             data-hi="अभी लाइव">LIVE NOW</span></div>
-                    <img src="Images/Thawe_Mata_Ji.jpg" id="dailyDarshanImg" alt="Mata Rani Live" class="darshan-img">
+                    <img src="Images/Thawe_Mata_Ji.jpg" id="dailyDarshanImg" alt="Live Darshan of Mata Thawe Wali"
+                        class="darshan-img">
                     <div class="quote-overlay">
                         <h3 id="dailyQuote">"Faith is the bird that feels the light when the dawn is still dark."</h3>
                         <p data-en="- Rabindranath Tagore" data-hi="- रवींद्रनाथ टैगोर">- Rabindranath Tagore</p>
@@ -207,7 +228,7 @@
                 </div>
                 <div class="gallery-grid">
                     <div class="gallery-item-large">
-                        <img src="Images/Mandir.jpg" alt="Thawe Mandir">
+                        <img src="Images/Mandir.jpg" alt="Thawe Dham Main Temple Structure">
                         <div class="item-overlay"><span data-en="Main Mandir" data-hi="मुख्य मंदिर">Main Mandir</span>
                         </div>
                     </div>
@@ -366,6 +387,51 @@
     </footer>
 
     <script type="module" src="script.js"></script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "HinduTemple",
+          "name": "Thawe Dham",
+          "image": "https://thawedham.com/Images/Mandir.jpg",
+          "description": "The divine Shakti Peeth of Mata Thawe Wali in Gopalganj, Bihar.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Thawe",
+            "addressLocality": "Gopalganj",
+            "addressRegion": "Bihar",
+            "postalCode": "841440",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 26.4290, 
+            "longitude": 84.4497
+          },
+          "url": "https://thawedham.com",
+          "telephone": "+919971040201",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "04:00",
+              "closes": "21:00"
+            }
+          ],
+          "potentialAction": {
+            "@type": "UseAction",
+            "target": "https://thawedham.com/#kaithi",
+            "name": "Kaithi Script Converter"
+          }
+        }
+        </script>
 </body>
 
 </html>
