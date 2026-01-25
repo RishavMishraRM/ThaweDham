@@ -514,3 +514,225 @@ if (downloadBtn) {
         setTimeout(() => { icon.className = 'fas fa-file-download'; }, 2000);
     });
 }
+
+/**
+ * ====================================================================
+ * FESTIVAL CALENDAR LOGIC (Interactive Grid)
+ * ====================================================================
+ * Fetches JSON data and renders a full month-view calendar.
+ */
+let allFestivals = [];
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+/**
+ * ====================================================================
+ * FESTIVAL CALENDAR LOGIC (Hybrid: JSON + Moon Phase Engine)
+ * ====================================================================
+ * Fetches JSON data for Static Festivals (Holi/Diwali).
+ * Calculates Recurring Fasts (Ekadashi/Pradosh) algorithmically.
+ */
+// Reference New Moon (Amavasya) for calculation anchoring
+// Epoc: Jan 18, 2026 12:00 UTC was Amavasya
+const LUNAR_REF = new Date('2026-01-18T12:00:00Z');
+const SYNODIC_MONTH = 29.53059; // Average lunar cycle in days
+
+async function initCalendar() {
+    try {
+        const response = await fetch('festivals_2026.json');
+        if (response.ok) {
+            allFestivals = await response.json();
+        } else {
+            console.warn("Static calendar data missing, relying on Moon Engine.");
+        }
+
+        // Render initial calendar
+        renderCalendar(currentMonth, currentYear);
+        renderDetails(new Date().toISOString().slice(0, 10));
+
+        // Setup Controls
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar(currentMonth, currentYear);
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            renderCalendar(currentMonth, currentYear);
+        });
+
+    } catch (error) {
+        console.error("Calendar Init Error:", error);
+    }
+}
+
+// 🌑 THE MOON ENGINE 🌕
+// Calculates Tithi based on lunar age from reference date works for any year
+function getMoonEvent(dateStr) {
+    const targetDate = new Date(dateStr + "T12:00:00Z"); // Noon UTC to avoid timezone edge cases
+
+    // Days since reference
+    const diffTime = targetDate - LUNAR_REF;
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+    // Lunar Age (0 to 29.53)
+    let lunarAge = diffDays % SYNODIC_MONTH;
+    if (lunarAge < 0) lunarAge += SYNODIC_MONTH; // Handle past dates
+
+    // Tithi Calculation (roughly 1 Tithi = 0.98 days)
+    // 0-15: Shukla (Waxing), 15-30: Krishna (Waning)
+    // We target specific windows for Ekadashi (11th) and Pradosh (13th)
+
+    // Tolerance window (+/- 0.5 day)
+    const isEkadashi = (lunarAge >= 10 && lunarAge <= 11) || (lunarAge >= 24.5 && lunarAge <= 25.5);
+    const isPradosh = (lunarAge >= 11.8 && lunarAge <= 12.8) || (lunarAge >= 26.5 && lunarAge <= 27.5);
+    const isPurnima = (lunarAge >= 13.8 && lunarAge <= 14.8);
+    const isAmavasya = (lunarAge >= 28.5 || lunarAge <= 0.5);
+    const isSankashti = (lunarAge >= 17.5 && lunarAge <= 18.5); // Krishna Chaturthi
+
+    if (isEkadashi) return { name: "Ekadashi Vrat", type: "Ekadashi", desc: "Day of Lord Vishnu. Fasting grants merit." };
+    if (isPradosh) return { name: "Pradosh Vrat", type: "Pradosh", desc: "Day of Lord Shiva. Twilight worship." };
+    if (isPurnima) return { name: "Purnima (Full Moon)", type: "Purnima", desc: "Full Moon day. Satyanarayan Puja." };
+    if (isAmavasya) return { name: "Amavasya (New Moon)", type: "Amavasya", desc: "New Moon day. Pitru Tarpan." };
+    if (isSankashti) return { name: "Sankashti Chaturthi", type: "Sankashti", desc: "Ganesh Puja. Removes obstacles." };
+
+    return null;
+}
+
+function renderCalendar(month, year) {
+    const grid = document.getElementById('calendarGrid');
+    const monthTitle = document.getElementById('currentMonthYear');
+    monthTitle.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+    grid.innerHTML = "";
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const prevMonthDays = new Date(year, month, 0).getDate();
+
+    for (let i = firstDay; i > 0; i--) {
+        const div = document.createElement('div');
+        div.textContent = prevMonthDays - i + 1;
+        div.className = 'other-month';
+        grid.appendChild(div);
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const div = document.createElement('div');
+        div.textContent = i;
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        div.setAttribute('data-date', dateStr);
+
+        // 1. Check Static JSON first (Higher Priority)
+        let event = allFestivals.find(f => f.date === dateStr);
+
+        // 2. If no static event, check Moon Engine
+        if (!event) {
+            const moonEvent = getMoonEvent(dateStr);
+            if (moonEvent) {
+                div.classList.add('moon-event'); // Different style for calculated events?
+                // We mark it as having an event
+                event = moonEvent;
+            }
+        }
+
+        if (event) div.classList.add('has-event');
+        if (dateStr === today) div.classList.add('today');
+
+        div.addEventListener('click', () => {
+            document.querySelectorAll('.cal-grid div').forEach(el => el.classList.remove('selected'));
+            div.classList.add('selected');
+            renderDetails(dateStr);
+        });
+
+        grid.appendChild(div);
+    }
+}
+
+function renderDetails(dateStr) {
+    const detailDate = document.getElementById('detailDate');
+    const detailTitle = document.getElementById('detailTitle');
+    const detailDesc = document.getElementById('detailDesc');
+    const detailTithi = document.getElementById('detailTithi');
+
+    const dateObj = new Date(dateStr);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    detailDate.textContent = dateObj.toLocaleDateString('en-IN', options);
+
+    // Hybrid Lookup
+    let event = allFestivals.find(f => f.date === dateStr);
+    let type = "Daily Darshan";
+
+    // Moon Engine Fallback
+    if (!event) {
+        event = getMoonEvent(dateStr);
+        if (event) type = "Calculated Tithi";
+    } else {
+        type = "Major Festival";
+    }
+
+    gsap.fromTo('#selectedDateDetails', { opacity: 0.5 }, { opacity: 1, duration: 0.3 });
+
+    if (event) {
+        detailTitle.textContent = event.name;
+        detailTitle.style.color = 'var(--primary)';
+        detailDesc.textContent = event.desc || "Auspicious day according to Hindu Panchang.";
+        detailTithi.textContent = event.type;
+    } else {
+        detailTitle.textContent = "No Major Festival";
+        detailTitle.style.color = "var(--text-muted)";
+        detailDesc.textContent = "It is a peaceful day for daily rituals and regular Aarti.";
+        detailTithi.textContent = "Daily Darshan";
+    }
+}
+
+initCalendar();
+
+
+/**
+ * ====================================================================
+ * PWA SERVICE WORKER REGISTRATION
+ * ====================================================================
+ */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(req => console.log("Service Worker Registered!", req))
+            .catch(err => console.log("Service Worker Failed", err));
+    });
+}
+
+/**
+ * ====================================================================
+ * ANALYTICS TRACKING
+ * ====================================================================
+ * Sends pageview data to the serverless backend.
+ */
+function logAnalytics() {
+    // Basic session check to avoid spamming on reload (optional)
+    if (sessionStorage.getItem('view_logged')) return;
+
+    const data = {
+        path: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        referrer: document.referrer,
+        screen: `${window.screen.width}x${window.screen.height}`
+    };
+
+    fetch('/api/analytics', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(() => {
+        console.log("Analytics sent");
+        sessionStorage.setItem('view_logged', 'true');
+    }).catch(e => console.error("Analytics failed", e));
+}
+
+// Log visit after a slight delay
+setTimeout(logAnalytics, 3000);

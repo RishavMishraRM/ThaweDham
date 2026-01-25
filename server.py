@@ -11,7 +11,14 @@ from dotenv import load_dotenv  # Library to load environment variables from .en
 load_dotenv()
 
 # Initialize the Flask application
-app = Flask(__name__)
+# static_folder='.' allows serving files from the root directory
+# static_url_path='' allows accessing them directly (e.g. /style.css instead of /static/style.css)
+app = Flask(__name__, static_folder='.', static_url_path='')
+
+@app.route('/')
+def home():
+    """Serve the main HTML file"""
+    return app.send_static_file('index.html')
 # Enable CORS for all routes (allows frontend to talk to this backend locally)
 CORS(app)
 

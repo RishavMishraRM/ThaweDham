@@ -1005,3 +1005,58 @@ footer {
         align-items: stretch;
     }
 }
+
+/* Calendar Grid Styles */
+.cal-grid div {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    position: relative;
+    color: var(--text-muted);
+}
+
+.cal-grid div:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+}
+
+.cal-grid .today {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.cal-grid .selected {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.cal-grid .has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.cal-grid .other-month {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .calendar-container {
+        grid-template-columns: 1fr !important;
+    }
+    .calendar-right {
+        border-left: none !important;
+        border-top: 1px solid var(--border-color);
+        padding: 20px !important;
+    }
+}

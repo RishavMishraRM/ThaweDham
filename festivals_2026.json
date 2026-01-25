@@ -1,0 +1,542 @@
+[
+    {
+        "date": "2026-01-02",
+        "name": "Paush Purnima",
+        "type": "Purnima",
+        "desc": "Full moon day of Paush month. Holy dip in Ganga is auspicious."
+    },
+    {
+        "date": "2026-01-06",
+        "name": "Sakat Chauth (Sankashti)",
+        "type": "Sankashti",
+        "desc": "Dedicated to Lord Ganesha for removing obstacles."
+    },
+    {
+        "date": "2026-01-14",
+        "name": "Makar Sankranti",
+        "type": "Major",
+        "desc": "Sun enters Capricorn (Makar Rashi). Harvest festival."
+    },
+    {
+        "date": "2026-01-16",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Fasting dedicated to Lord Shiva during sunset."
+    },
+    {
+        "date": "2026-01-18",
+        "name": "Mauni Amavasya",
+        "type": "Amavasya",
+        "desc": "Day of silence and spiritual sadhana."
+    },
+    {
+        "date": "2026-01-22",
+        "name": "Vasant Panchami",
+        "type": "Major",
+        "desc": "Worship of Goddess Saraswati. Marks arrival of Spring."
+    },
+    {
+        "date": "2026-01-29",
+        "name": "Jaya Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Fasting grants relief from pisachuni (ghostly) forms."
+    },
+    {
+        "date": "2026-01-31",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Dedicated to Lord Shiva."
+    },
+    {
+        "date": "2026-02-01",
+        "name": "Magha Purnima",
+        "type": "Purnima",
+        "desc": "Full moon dedicated to moon god and pitru."
+    },
+    {
+        "date": "2026-02-05",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Fasting for Ganesha."
+    },
+    {
+        "date": "2026-02-13",
+        "name": "Vijaya Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Grants victory over enemies."
+    },
+    {
+        "date": "2026-02-15",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja during evening twilight."
+    },
+    {
+        "date": "2026-02-16",
+        "name": "Maha Shivaratri",
+        "type": "Major",
+        "desc": "The Great Night of Shiva. Jagran and Rudrabhishek."
+    },
+    {
+        "date": "2026-02-17",
+        "name": "Somvati Amavasya",
+        "type": "Amavasya",
+        "desc": "Amavasya falling on Monday, very auspicious for ancestors."
+    },
+    {
+        "date": "2026-02-28",
+        "name": "Amalaki Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Worship of Amla tree as Lord Vishnu."
+    },
+    {
+        "date": "2026-03-02",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-03-03",
+        "name": "Holika Dahan / Purnima",
+        "type": "Purnima",
+        "desc": "Burning of Holika effigies."
+    },
+    {
+        "date": "2026-03-04",
+        "name": "Holi (Dhulandi)",
+        "type": "Major",
+        "desc": "Festival of Colors. Triumph of Prahlad."
+    },
+    {
+        "date": "2026-03-07",
+        "name": "Bhalachandra Sankashti",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-03-15",
+        "name": "Papmochani Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Removes sins."
+    },
+    {
+        "date": "2026-03-17",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-03-20",
+        "name": "Chaitra Navratri Begins",
+        "type": "Major",
+        "desc": "New Year (Vikram Samvat 2083). Kalash Sthapana."
+    },
+    {
+        "date": "2026-03-22",
+        "name": "Gauri Puja / Matsya Jayanti",
+        "type": "Festival",
+        "desc": "Worship of Gauri and Lord Vishnu's fish avatar."
+    },
+    {
+        "date": "2026-03-28",
+        "name": "Ram Navami",
+        "type": "Major",
+        "desc": "Birth of Lord Rama."
+    },
+    {
+        "date": "2026-03-29",
+        "name": "Kamada Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Fulfills desires."
+    },
+    {
+        "date": "2026-03-31",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-04-02",
+        "name": "Hanuman Jayanti / Purnima",
+        "type": "Major",
+        "desc": "Birth of Lord Hanuman."
+    },
+    {
+        "date": "2026-04-05",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-04-13",
+        "name": "Varuthini Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Grants fortune."
+    },
+    {
+        "date": "2026-04-15",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-04-20",
+        "name": "Akshaya Tritiya",
+        "type": "Major",
+        "desc": "Day of eternal result. Gold buying is auspicious."
+    },
+    {
+        "date": "2026-04-27",
+        "name": "Mohini Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Based on Mohini Avatar of Vishnu."
+    },
+    {
+        "date": "2026-04-29",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-05-01",
+        "name": "Buddha Purnima",
+        "type": "Purnima",
+        "desc": "Birth of Lord Buddha (Avatar of Vishnu)."
+    },
+    {
+        "date": "2026-05-05",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-05-12",
+        "name": "Apara Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Gives unlimited merit."
+    },
+    {
+        "date": "2026-05-14",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-05-17",
+        "name": "Shani Jayanti / Amavasya",
+        "type": "Amavasya",
+        "desc": "Birth of Shani Dev."
+    },
+    {
+        "date": "2026-05-27",
+        "name": "Nirjala Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Most powerful Ekadashi. Fasting without water."
+    },
+    {
+        "date": "2026-05-29",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-06-03",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-06-10",
+        "name": "Yogini Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Removes sins and health issues."
+    },
+    {
+        "date": "2026-06-13",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-06-26",
+        "name": "Devshayani Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Chaturmas begins. Lord Vishnu sleeps."
+    },
+    {
+        "date": "2026-06-28",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-06-29",
+        "name": "Guru Purnima",
+        "type": "Purnima",
+        "desc": "Worship of the Guru (Teacher)."
+    },
+    {
+        "date": "2026-07-03",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-07-10",
+        "name": "Kamika Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Worship of Lord Vishnu."
+    },
+    {
+        "date": "2026-07-12",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-07-20",
+        "name": "Nag Panchami",
+        "type": "Festival",
+        "desc": "Worship of Nag Devta (Snakes)."
+    },
+    {
+        "date": "2026-07-25",
+        "name": "Pavitropana Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Putrada Ekadashi."
+    },
+    {
+        "date": "2026-07-27",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-08-01",
+        "name": "Sankashti Chaturthi",
+        "type": "Sankashti",
+        "desc": "Ganesha fasting."
+    },
+    {
+        "date": "2026-08-08",
+        "name": "Aja Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Removes past sins."
+    },
+    {
+        "date": "2026-08-11",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-08-27",
+        "name": "Raksha Bandhan / Purnima",
+        "type": "Major",
+        "desc": "Bond of protection. Shravan Purnima."
+    },
+    {
+        "date": "2026-08-31",
+        "name": "Kajari Teej",
+        "type": "Festival",
+        "desc": "Fasting for husbands."
+    },
+    {
+        "date": "2026-09-04",
+        "name": "Janmashtami",
+        "type": "Major",
+        "desc": "Birth of Krishna."
+    },
+    {
+        "date": "2026-09-06",
+        "name": "Parivartini Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Vishnu turns while sleeping."
+    },
+    {
+        "date": "2026-09-08",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-09-14",
+        "name": "Hartalika Teej",
+        "type": "Major",
+        "desc": "Parvati's fast for Shiva."
+    },
+    {
+        "date": "2026-09-15",
+        "name": "Ganesh Chaturthi",
+        "type": "Major",
+        "desc": "Ganesh Utsav begins."
+    },
+    {
+        "date": "2026-09-20",
+        "name": "Indira Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Pitru Paksha Ekadashi."
+    },
+    {
+        "date": "2026-09-23",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-09-25",
+        "name": "Anant Chaturdashi",
+        "type": "Festival",
+        "desc": "Ganesh Visarjan."
+    },
+    {
+        "date": "2026-10-05",
+        "name": "Pashankusha Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Grants heavenly pleasures."
+    },
+    {
+        "date": "2026-10-07",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-10-12",
+        "name": "Shardiya Navratri Begins",
+        "type": "Major",
+        "desc": "Ghat Sthapana."
+    },
+    {
+        "date": "2026-10-18",
+        "name": "Maha Saptami",
+        "type": "Major",
+        "desc": "Durga Puja begins in Bengal/Bihar."
+    },
+    {
+        "date": "2026-10-19",
+        "name": "Maha Ashtami / Navami",
+        "type": "Major",
+        "desc": "Sandhi Puja and Kanya Pujan."
+    },
+    {
+        "date": "2026-10-20",
+        "name": "Dussehra (Vijayadashami)",
+        "type": "Major",
+        "desc": "Burning of Ravana."
+    },
+    {
+        "date": "2026-10-21",
+        "name": "Rama Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Worship during Diwali week."
+    },
+    {
+        "date": "2026-10-23",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-10-25",
+        "name": "Sharad Purnima",
+        "type": "Purnima",
+        "desc": "Kojagari Purnima."
+    },
+    {
+        "date": "2026-10-28",
+        "name": "Karwa Chauth",
+        "type": "Major",
+        "desc": "Wives fast for husbands."
+    },
+    {
+        "date": "2026-11-04",
+        "name": "Rama Ekadashi / Vasubaras",
+        "type": "Ekadashi",
+        "desc": "Start of Diwali festivities."
+    },
+    {
+        "date": "2026-11-06",
+        "name": "Dhanteras",
+        "type": "Festival",
+        "desc": "Buying utensils/gold. Worship of Dhanvantari."
+    },
+    {
+        "date": "2026-11-07",
+        "name": "Narak Chaturdashi",
+        "type": "Festival",
+        "desc": "Chhoti Diwali."
+    },
+    {
+        "date": "2026-11-08",
+        "name": "Diwali (Lakshmi Puja)",
+        "type": "Major",
+        "desc": "Festival of Lights."
+    },
+    {
+        "date": "2026-11-09",
+        "name": "Govardhan Puja",
+        "type": "Festival",
+        "desc": "Worship of Govardhan Hill."
+    },
+    {
+        "date": "2026-11-10",
+        "name": "Bhai Dooj",
+        "type": "Festival",
+        "desc": "Sisters pray for brothers."
+    },
+    {
+        "date": "2026-11-14",
+        "name": "Chhath Puja (Sandhya Arghya)",
+        "type": "Bihar Special",
+        "desc": "Evening offering to Sun God."
+    },
+    {
+        "date": "2026-11-15",
+        "name": "Chhath Puja (Usha Arghya)",
+        "type": "Bihar Special",
+        "desc": "Morning offering to Sun God."
+    },
+    {
+        "date": "2026-11-19",
+        "name": "Devutthana Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Tulsi Vivah. Wedding season starts."
+    },
+    {
+        "date": "2026-11-21",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-11-23",
+        "name": "Kartik Purnima",
+        "type": "Purnima",
+        "desc": "Dev Deepawali in Varanasi."
+    },
+    {
+        "date": "2026-12-04",
+        "name": "Utpanna Ekadashi",
+        "type": "Ekadashi",
+        "desc": "Birth of Ekadashi Mata."
+    },
+    {
+        "date": "2026-12-06",
+        "name": "Pradosh Vrat (Krishna)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    },
+    {
+        "date": "2026-12-19",
+        "name": "Mokshada Ekadashi / Gita Jayanti",
+        "type": "Ekadashi",
+        "desc": "Day Bhagavad Gita was spoken."
+    },
+    {
+        "date": "2026-12-21",
+        "name": "Pradosh Vrat (Shukla)",
+        "type": "Pradosh",
+        "desc": "Shiv Puja."
+    }
+]
