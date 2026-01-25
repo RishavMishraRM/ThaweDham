@@ -170,6 +170,19 @@ nav {
     color: white;
 }
 
+#installAppBtn {
+    background: var(--gradient-gold);
+    color: #2D1409;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    border: none;
+}
+
+#installAppBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.6);
+}
+
 .menu-toggle {
     display: none;
     font-size: 1.5rem;
@@ -1054,6 +1067,7 @@ footer {
     .calendar-container {
         grid-template-columns: 1fr !important;
     }
+
     .calendar-right {
         border-left: none !important;
         border-top: 1px solid var(--border-color);

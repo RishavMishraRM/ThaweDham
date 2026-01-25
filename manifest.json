@@ -1,11 +1,12 @@
 {
     "name": "Thawe Dham Official",
     "short_name": "Thawe Dham",
-    "start_url": "/index.html",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#0F0F0F",
     "theme_color": "#FF7043",
-    "orientation": "portrait",
+    "description": "Official App of Thawe Dham Shakti Peeth. Explore Live Darshan, Hindu Calendar, and AI Kaithi Converter.",
     "icons": [
         {
             "src": "Images/Thawe_Mata_Ji.jpg",
@@ -17,6 +18,5 @@
             "sizes": "512x512",
             "type": "image/jpeg"
         }
-    ],
-    "description": "Official App of Thawe Dham Shakti Peeth, Gopalganj"
+    ]
 }
