@@ -694,7 +694,7 @@ initCalendar();
 
 /**
  * ====================================================================
- * PWA SERVICE WORKER REGISTRATION
+ * PWA SERVICE WORKER & INSTALL LOGIC
  * ====================================================================
  */
 if ('serviceWorker' in navigator) {
@@ -704,6 +704,51 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log("Service Worker Failed", err));
     });
 }
+
+// Install App Logic
+let deferredPrompt;
+const installBtn = document.getElementById('installAppBtn');
+
+function setupPWAInstallPrompt() {
+    // 0. Show button IMMEDIATELY (User Requirement)
+    if (installBtn) {
+        installBtn.style.display = 'flex';
+    }
+
+    // 1. Listen for the install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log("👍 PWA Install Prompt Fired!");
+        e.preventDefault();
+        deferredPrompt = e;
+        // Optional: Pulse animation to indicate "Ready for 1-click install"
+        if (installBtn) gsap.to(installBtn, { scale: 1.1, yoyo: true, repeat: 3, duration: 0.5 });
+    });
+
+    // 2. Handle Button Click
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Happy Path: Browser supports 1-click install
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            } else {
+                // Manual Path: Browser hasn't fired event yet (or is iOS)
+                alert("To install Thawe Dham App:\n\n👉 Chrome/Edge: Click the three dots (⋮) -> 'Add to Home Screen' or 'Install App'.\n👉 iOS: Tap 'Share' -> 'Add to Home Screen'.");
+            }
+        });
+    }
+}
+
+setupPWAInstallPrompt();
+
+// Check if app is already installed
+window.addEventListener('appinstalled', () => {
+    console.log('Thawe Dham App Installed');
+    if (installBtn) installBtn.style.display = 'none';
+});
 
 /**
  * ====================================================================
