@@ -99,6 +99,41 @@ def convert_kaithi():
         print(f"❌ Server Error: {str(e)}")
         return jsonify({"error": "Failed to process document", "details": str(e)}), 500
 
+@app.route('/api/content/rituals-news', methods=['GET'])
+def get_rituals_news_content():
+    """
+    Scans the 'Rituals and News' directory and returns categorized images.
+    Files should start with 'Rituals' or 'News'.
+    """
+    directory = 'Rituals and News'
+    if not os.path.exists(directory):
+        return jsonify({"rituals": [], "news": []})
+
+    files = [f for f in os.listdir(directory) if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))]
+    
+    content = {
+        "rituals": [],
+        "news": []
+    }
+    
+    for file in files:
+        # Check start of filename to categorize
+        if file.lower().startswith('rituals'):
+            content['rituals'].append(file)
+        elif file.lower().startswith('news'):
+            content['news'].append(file)
+            
+    # Sort them to ensure order (e.g. News 1, News 2)
+    content['rituals'].sort()
+    content['news'].sort()
+    
+    return jsonify(content)
+
+# Serve the 'Rituals and News' directory as static files
+@app.route('/Rituals and News/<path:filename>')
+def serve_rituals_news_files(filename):
+    return app.send_from_directory('Rituals and News', filename)
+
 # Entry point: Run the server if executed directly
 if __name__ == '__main__':
     print("🚀 Python Kaithi Converter Server starting on http://localhost:5000")

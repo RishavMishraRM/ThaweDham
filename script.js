@@ -551,17 +551,24 @@ async function initCalendar() {
         renderDetails(new Date().toISOString().slice(0, 10));
 
         // Setup Controls
-        document.getElementById('prevMonth').addEventListener('click', () => {
-            currentMonth--;
-            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-            renderCalendar(currentMonth, currentYear);
-        });
+        // Setup Controls
+        const prevBtn = document.getElementById('prevMonth');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentMonth--;
+                if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+                renderCalendar(currentMonth, currentYear);
+            });
+        }
 
-        document.getElementById('nextMonth').addEventListener('click', () => {
-            currentMonth++;
-            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-            renderCalendar(currentMonth, currentYear);
-        });
+        const nextBtn = document.getElementById('nextMonth');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentMonth++;
+                if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+                renderCalendar(currentMonth, currentYear);
+            });
+        }
 
     } catch (error) {
         console.error("Calendar Init Error:", error);
@@ -604,6 +611,10 @@ function getMoonEvent(dateStr) {
 function renderCalendar(month, year) {
     const grid = document.getElementById('calendarGrid');
     const monthTitle = document.getElementById('currentMonthYear');
+
+    // Safety check: specific to index.html
+    if (!grid || !monthTitle) return;
+
     monthTitle.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
     grid.innerHTML = "";
 
@@ -654,6 +665,8 @@ function renderCalendar(month, year) {
 
 function renderDetails(dateStr) {
     const detailDate = document.getElementById('detailDate');
+    if (!detailDate) return; // Safety check
+
     const detailTitle = document.getElementById('detailTitle');
     const detailDesc = document.getElementById('detailDesc');
     const detailTithi = document.getElementById('detailTithi');

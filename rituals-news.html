@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rituals and News | Thawe Dham</title>
+    <meta name="keywords" content="Thawe Dham Rituals, Temple News, Thawe Mandir Events, Daily Aarti">
+    <meta name="description"
+        content="Stay updated with the daily rituals, upcoming events, and latest news from Thawe Dham Shakti Peeth.">
+    <link rel="canonical" href="https://thawedham.com/rituals-news.html">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF7043">
+
+    <!-- IOS PWA Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Thawe Dham">
+    <link rel="apple-touch-icon" href="Images/Thawe_Mata_Ji.jpg">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Outfit:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Specific Styles for Rituals Page */
+        .page-hero {
+            height: 50vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Images/Mandir_Gate.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-hero h1 {
+            font-size: 4rem;
+            color: var(--text-main);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Two Column Layout */
+        .main-layout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            padding-bottom: 80px;
+        }
+
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Individual Content Cards (formerly full-width sections) */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+        }
+
+        .rituals-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* Stacked layout inside card is cleaner for column view */
+            gap: 20px;
+        }
+
+        .content-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            height: auto;
+            background: rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .content-text h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .content-text p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-column {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .aarti-card {
+            background: rgba(255, 112, 67, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+        }
+
+        .aarti-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-family: var(--font-heading);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .aarti-text {
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-line;
+            /* Preserves line breaks */
+            font-family: 'Outfit', sans-serif;
+        }
+
+        @media (max-width: 992px) {
+            .main-layout-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-column {
+                position: static;
+            }
+
+            .page-hero h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body data-lang="en">
+
+    <!-- Divine Preloader -->
+    <div id="preloader">
+        <div class="om-container">
+            <div class="om-symbol">ॐ</div>
+            <div class="loading-text">Loading Divinity...</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header id="header">
+        <nav>
+            <div class="logo">THAWE<span>DHAM</span></div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home" data-en="Home" data-hi="मुख्य पृष्ठ">Home</a></li>
+                <li><a href="index.html#darshan" data-en="Live Darshan" data-hi="दिव्य दर्शन">Live Darshan</a></li>
+                <li><a href="rituals-news.html" class="active" data-en="Rituals & News"
+                        data-hi="अनुष्ठान और समाचार">Rituals & News</a></li>
+                <li><a href="index.html#history" data-en="History" data-hi="इतिहास">History</a></li>
+                <li><a href="index.html#sewa" data-en="E-Sewa" data-hi="ई-सेवा">E-Sewa</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button id="installAppBtn" class="control-btn" style="display: none;" title="Install App"><i
+                        class="fas fa-download"></i></button>
+                <button id="langToggle" class="control-btn" title="Change Language">EN</button>
+                <button id="themeToggle" class="control-btn" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Hero -->
+        <div class="page-hero">
+            <div class="container">
+                <h1 data-en="Rituals & Updates" data-hi="अनुष्ठान और अपडेट">Rituals & Updates</h1>
+                <p class="subtitle" style="margin-top: 10px;" data-en="The Pulse of Thawe Dham"
+                    data-hi="थावे धाम की धड़कन">The Pulse of Thawe Dham</p>
+            </div>
+        </div>
+
+        <div class="container main-layout-wrapper">
+            <!-- Left Column: Dynamic Content -->
+            <div class="content-column" id="dynamic-content">
+                <!-- Content will be injected here via JavaScript -->
+                <div style="text-align: center; padding: 50px;">
+                    <p>Loading divine updates...</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar (Aarti) -->
+            <aside class="sidebar-column">
+                <div class="aarti-card">
+                    <h3 class="aarti-title">॥ आरती ॥</h3>
+                    <div class="aarti-text">
+                        करती है जग रक्षावली, थावेवाली माँ
+                        महिमा तुम्हरी है निराली, थावेवाली माँ
+                        जय हो सिंहासनी माँ ॥
+
+                        दुखियों के घर में सुख बसाती
+                        अधियारों को देती उजियाली
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+
+                        सबकी मिटाती रात काली
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+                        महिमा तुम्हरी है निराली
+                        जय हो थावेवाली माँ ॥
+
+
+                        तेरी दया से जीव है नैया
+                        तेरे सहारे माँ जगत की खैया
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+
+                        दुखियों के घर में सुख दिलाती
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+                        महिमा तुम्हरी है निराली
+                        जय हो थावेवाली माँ ॥
+
+                        दयाद्रव जाननी मेरी अवस्था
+                        तेरे हाथों में सारी व्यवस्था
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+
+
+                        कृपा करो माँ सिंहासनी
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+                        महिमा तुम्हरी है निराली
+                        जय हो थावेवाली माँ ॥
+
+                        बैठे हैं चरणों में आस लगाए
+                        झोली हमारी भरने को आए
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+
+                        ले लो आरती हमारी
+                        मेरी थावेवाली माँ, जय हो सिंहासनी माँ ॥
+                        महिमा तुम्हरी है निराली
+                        जय हो थावेवाली माँ ॥
+
+                        ॐ नमश्चण्डिकायै।
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <script>
+            // specific logic for this page to fetch content
+            document.addEventListener('DOMContentLoaded', async () => {
+                const container = document.getElementById('dynamic-content');
+
+                try {
+                    const response = await fetch('/api/content/rituals-news');
+                    const data = await response.json();
+
+                    container.innerHTML = ''; // Clear loading text
+
+                    // Process Rituals
+                    if (data.rituals && data.rituals.length > 0) {
+                        data.rituals.forEach((img, index) => {
+                            const section = createSection(img, 'Rituals', index);
+                            container.appendChild(section);
+                        });
+                    }
+
+                    // Process News
+                    if (data.news && data.news.length > 0) {
+                        data.news.forEach((img, index) => {
+                            const section = createSection(img, 'News', index + (data.rituals ? data.rituals.length : 0));
+                            container.appendChild(section);
+                        });
+                    }
+
+                    // Trigger animations for new elements
+                    gsap.utils.toArray('.content-card').forEach(card => {
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 90%",
+                            },
+                            opacity: 0,
+                            y: 30,
+                            duration: 0.8
+                        });
+                    });
+
+                } catch (error) {
+                    console.error("Failed to fetch content:", error);
+                    container.innerHTML = '<p style="text-align:center">Unable to load content at this moment.</p>';
+                }
+
+                function createSection(filename, type, index) {
+                    const section = document.createElement('div');
+                    section.className = 'content-card';
+                    // index logic for layout not needed as much in stacked cards, but kept for future use
+
+                    const isNews = type === 'News';
+                    const title = isNews ? "News & Events" : "Temple Rituals";
+                    const subtitle = isNews ? "Latest Updates" : "Daily Worship";
+
+                    const descEn = isNews
+                        ? "Stay informed about the latest happenings, upcoming festivals, and community initiatives at Thawe Dham."
+                        : "Participate in the divine daily aarti and rituals that sustain the spiritual energy of the Shakti Peeth.";
+
+                    const descHi = isNews
+                        ? "थावे धाम में नवीनतम घटनाओं, आगामी त्योहारों और सामुदायिक पहलों के बारे में सूचित रहें।"
+                        : "दिव्य दैनिक आरती और अनुष्ठानों में भाग लें जो शक्तिपीठ की आध्यात्मिक ऊर्जा को बनाए रखते हैं।";
+
+                    section.innerHTML = `
+                        <div class="rituals-grid">
+                            <div class="content-image">
+                                <img src="Rituals%20and%20News/${encodeURIComponent(filename)}" alt="${type}">
+                            </div>
+                            <div class="content-text">
+                                <span class="subtitle" data-en="${subtitle}" data-hi="${subtitle === 'Daily Worship' ? 'दैनिक पूजा' : 'नवीनतम अपडेट'}">${subtitle}</span>
+                                <h2 data-en="${title}" data-hi="${title === 'Temple Rituals' ? 'मंदिर के अनुष्ठान' : 'समाचार और कार्यक्रम'}">${title}</h2>
+                                <p data-en="${descEn}" data-hi="${descHi}">${descEn}</p>
+                            </div>
+                        </div>
+                    `;
+                    return section;
+                }
+            });
+        </script>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">THAWE<span>DHAM</span></div>
+            <p data-en="May Mata's blessings be with you always." data-hi="माता रानी की कृपा आप पर सदैव बनी रहे।">May
+                Mata's blessings be with you always.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Thawe Dham. <span data-en="Designed with devotion."
+                        data-hi="भक्ति के साथ निर्मित।">Designed with devotion.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        // Simple script specific for this page to handle active state and animations
+        // Reusing the main script.js for core logic, but adding specific initialization if needed
+        document.addEventListener('DOMContentLoaded', () => {
+            // Re-trigger animations for this page elements
+            gsap.from(".page-hero h1", { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+
+            gsap.utils.toArray('.rituals-grid').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
