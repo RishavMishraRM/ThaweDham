@@ -99,7 +99,7 @@ def convert_kaithi():
         print(f"❌ Server Error: {str(e)}")
         return jsonify({"error": "Failed to process document", "details": str(e)}), 500
 
-@app.route('/api/content/rituals-news', methods=['GET'])
+@app.route('/api/rituals', methods=['GET'])
 def get_rituals_news_content():
     """
     Scans the 'Rituals and News' directory and returns categorized images.

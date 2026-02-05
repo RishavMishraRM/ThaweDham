@@ -282,7 +282,7 @@
                 const container = document.getElementById('dynamic-content');
 
                 try {
-                    const response = await fetch('/api/content/rituals-news');
+                    const response = await fetch('/api/rituals');
                     const data = await response.json();
 
                     container.innerHTML = ''; // Clear loading text
